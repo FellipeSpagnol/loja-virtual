@@ -26,7 +26,7 @@ class Compra:
             return False
 
     def exibir_compra(self) -> None:
-        print('LISTA DE ITENS')
+        print('< LISTA DE ITENS >')
         for i in range(len(self.itens)):
             print(f'{i+1} > {self.itens[i].produto.nome} ')
             print(f'Valor Unitário: R${self.itens[i].produto.valor():.2f}')
@@ -42,9 +42,12 @@ class Compra:
         else:
             return False
 
-    def atualizar_quantidade(self, index: int, quantidade_nova: int) -> bool:
-        if quantidade_nova > 0:
-            self.itens[index].quantidade = quantidade_nova
-            return True
+    def atualizar_quantidade(self, index: int, quantidade_nova: int) -> list[bool]:
+        if index in range(1, (len(self.itens)+1)):
+            if quantidade_nova > 0:
+                self.itens[index].quantidade = quantidade_nova
+                return [True, True]
+            else:
+                return [True, False]
         else:
-            return False
+            return [False, False]

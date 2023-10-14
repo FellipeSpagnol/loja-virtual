@@ -116,7 +116,6 @@ class Loja:
 
             return usuario_final
         else:
-            print('Não há usuarios cadastrados...\n')
             return None
 
     def produtos_mais_caros(self, numero_produtos: int) -> Optional[list[Produto]]:
@@ -128,7 +127,6 @@ class Loja:
 
             return [produto for produto in dict_ordenado]
         else:
-            print('Não há produtos cadastrados...\n')
             return None
 
     def produtos_mais_vendidos(self, numero_produtos: int) -> None:
@@ -147,18 +145,17 @@ class Loja:
             dict_ordenado = dict(sorted(dict_produtos.items(
             ), key=lambda item: item[1], reverse=True)[:numero_produtos])
 
-            print(f'{numero_produtos} PRODUTOS MAIS VENDIDOS')
+            print(f'< {numero_produtos} PRODUTOS MAIS VENDIDOS >')
             for produto in dict_ordenado:
                 print(f'> {produto.nome}')
                 print(f'Número de Vendas: {dict_ordenado[produto]}')
-                print(
-                    f'Valor Obtido: {dict_ordenado[produto] * produto.valor()}\n')
+                print(f'Valor Obtido: {dict_ordenado[produto] * produto.valor()}\n')
         else:
             print('Não há produtos cadastrados...\n')
 
     def compras_por_usuario(self) -> None:
         if self.numero_de_usuarios() > 0:
-            print('COMPRAS POR USUÁRIO\n')
+            print('\n< COMPRAS POR USUÁRIO >')
             for usuario in self.usuarios:
                 valor_total = 0
 
@@ -166,8 +163,8 @@ class Loja:
                     if compra.usuario == usuario:
                         valor_total += compra.custo()
 
-                print(f'> {usuario.nome}')
+                print(f'\n> {usuario.nome}')
                 print(f'CPF: {usuario.cpf}')
-                print(f'Valor Total Gasto: R${valor_total}\n')
+                print(f'Valor Total Gasto: R${valor_total}')
         else:
-            print('Não há usuários cadastrados...\n')
+            print('\nNão há usuários cadastrados...')
