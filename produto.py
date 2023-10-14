@@ -22,6 +22,12 @@ class Produto:
 
     def estoque(self) -> int:
         return self._estoque
+    
+    def valor_bruto(self) -> float:
+        return self._valor
+    
+    def valor_desconto(self) -> float:
+        return self._desconto
 
     def atualizar_desconto(self, desconto_novo: float) -> bool:
         if (0 <= desconto_novo <= 1):
