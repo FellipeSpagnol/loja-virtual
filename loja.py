@@ -55,7 +55,8 @@ class Loja:
     def adicionar_produto(self, nome: str, valor: float, categoria: str) -> bool:
         if valor > 0:
             produto = Produto(nome, valor, categoria)
-            self.produtos.append(produto)
+            if produto not in self.produtos:
+                self.produtos.append(produto)
             return True
         else:
             return False
