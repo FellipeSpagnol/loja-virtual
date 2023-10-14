@@ -41,9 +41,6 @@ class Loja:
             self.compra_atual = Compra(usuario)
             return True
         else:
-            print('Já há uma compra aberta no momento...')
-            print(
-                'Por favor, conclua ou cancele a compra atual antes de tentar novamente')
             return False
 
     def buscar_produto(self, nome_produto: str) -> Optional[Produto]:
