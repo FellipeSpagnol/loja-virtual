@@ -62,8 +62,12 @@ class Loja:
             print('Valor Inválido...')
             return False
 
-    def cancelar_compra(self) -> None:
-        self.compra_atual = None
+    def cancelar_compra(self) -> bool:
+        if self.compra_atual is not None:
+            self.compra_atual = None
+            return True
+        else:
+            return False
 
     def concluir_compra(self) -> bool:
         if self.compra_atual is not None:
