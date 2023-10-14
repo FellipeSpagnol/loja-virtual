@@ -29,7 +29,7 @@ class App:
 
                 for i in range(len(self.loja.produtos)):
                     print(f'\n{i + 1}> {self.loja.produtos[i].nome}')
-                    print(f'> Valor: R${self.loja.produtos[i].valor()}')
+                    print(f'> Valor: R${self.loja.produtos[i].valor():.2f}')
 
             elif opcao == '3':
                 print('\n< DETALHES DE PRODUTO >')
@@ -39,9 +39,9 @@ class App:
                 if produto is not None:
                     print(f'\n> {produto.nome}')
                     print(f'Categoria: {produto.categoria}')
-                    print(f'Valor Bruto: R${produto.valor_bruto()}')
-                    print(f'Valor Desconto: R${produto.valor_desconto()}')
-                    print(f'Estoque Disponível: R${produto.estoque}')
+                    print(f'Valor Bruto: R${produto.valor_bruto():.2f}')
+                    print(f'Valor Desconto: R${produto.valor_desconto():.2f}')
+                    print(f'Estoque Disponível: {produto.estoque()}')
                 else:
                     print(f'O produto com "{nome}" não foi encontrado...')
 
@@ -107,13 +107,13 @@ class App:
                 if self.loja.cancelar_compra():
                     print('\nCompra Cancelada!')
                 else:
-                    print('Não há nenhuma compra aberta no momento...')
+                    print('\nNão há nenhuma compra aberta no momento...')
 
             elif opcao == '9':
                 if self.loja.concluir_compra():
                     print('\nCompra Concluida!')
                 else:
-                    print('Não há nenhuma compra aberta no momento...')
+                    print('\nNão há nenhuma compra aberta no momento...')
 
             elif opcao == '10':
                 if self.loja.compra_atual is not None:
@@ -167,6 +167,8 @@ class App:
                             print('Índice Inválido...')
                     else:
                         print('Quantidade Inválida...')
+                else:
+                    print('\nNão há nenhuma compra aberta no momento...')
 
             elif opcao == '14':
                 print('\n< NÚMERO DE PRODUTOS >')
@@ -185,7 +187,7 @@ class App:
                 print(f'> Total: R${self.loja.valor_medio_das_compras():.2f}')
 
             elif opcao == '18':
-                print('\n< NÚMERO DE PRODUTOS >')
+                print('\n< NÚMERO DE USUÁRIOS >')
                 print(f'> Total: {self.loja.numero_de_usuarios()}')
 
             elif opcao == '19':
@@ -196,6 +198,17 @@ class App:
                 else:
                     print('Não Há Usuários Cadastrados...')
 
+            elif opcao == '22':
+                self.loja.compras_por_usuario()
+
+            elif opcao == '23':
+                self.loja.salvar()
+                print(f'\nEncerrando...')
+                break
+            else:
+                print(f'\nOpção Inválida...')
+
+            '''
             elif opcao == '20':
                 numero_produtos = 5
                 lista_produtos = self.loja.produtos_mais_caros(numero_produtos)
@@ -211,19 +224,10 @@ class App:
             elif opcao == '21':
                 numero_produtos = 5
                 self.loja.produtos_mais_vendidos(numero_produtos)
-
-            elif opcao == '22':
-                self.loja.compras_por_usuario()
-
-            elif opcao == '23':
-                self.loja.salvar()
-                print(f'\nEncerrando...')
-                break
-            else:
-                print(f'\nOpção Inválida...')
+            '''
 
     def menu(self) -> None:
-        print('< MENU PRINCIPAL >')
+        print('\n< MENU PRINCIPAL >')
 
         print('1 ) Cadastrar Produto')
         print('2 ) Visualizar Produtos')
@@ -246,5 +250,5 @@ class App:
         print('19) Relatório - Usuário com mais Compras')
         print('20) Relatório - 5 Produtos mais Caros')
         print('21) Relatório - 5 Produtos mais Vendidos')
-        print('22) Relatório - Gastos por Pessoa\n')
-        print('23) Encerrar Aplicativo')
+        print('22) Relatório - Gastos por Pessoa')
+        print('23) Encerrar Aplicativo\n')
