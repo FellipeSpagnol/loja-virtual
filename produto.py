@@ -36,3 +36,6 @@ class Produto:
             return True
         else:
             return False
+        
+    def __eq__(self, outro: "Produto") -> bool:
+        return self.nome == outro.nome
