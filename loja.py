@@ -77,7 +77,6 @@ class Loja:
                         produto.registrar_venda(item.quantidade)
             return True
         else:
-            print('Não há nenhuma compra aberta no momento...')
             return False
 
     def numero_de_produtos(self) -> int:
