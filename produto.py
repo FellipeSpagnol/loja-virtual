@@ -10,8 +10,12 @@ class Produto:
     def valor(self) -> float:
         return self._valor*(1 - self._desconto)
 
-    def registrar_aquisicao(self, quantidade: int) -> None:
-        self._estoque += quantidade
+    def registrar_aquisicao(self, quantidade: int) -> bool:
+        if quantidade > 0:
+            self._estoque += quantidade
+            return True
+        else: 
+            return False
 
     def registrar_venda(self, quantidade: int) -> bool:
         if (self._estoque - quantidade) >= 0:
