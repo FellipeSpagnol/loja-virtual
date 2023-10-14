@@ -57,8 +57,12 @@ class Loja:
             produto = Produto(nome, valor, categoria)
             if produto not in self.produtos:
                 self.produtos.append(produto)
+            else:
+                print('\nProduto Já Registrado...')
+                return False
             return True
         else:
+            print('Valor Inválido...')
             return False
 
     def cancelar_compra(self) -> None:
