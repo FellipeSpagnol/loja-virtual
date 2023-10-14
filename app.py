@@ -1,17 +1,37 @@
 from loja import Loja
+from produto import Produto
 
 
 class App:
-    
+
     def __init__(self) -> None:
         self.loja = Loja()
-    
+
     def excecutar(self) -> None:
-        self.menu()
-        
+        while (True):
+            self.menu()
+
+            opcao = input('> Informe a Opção Desejada: ')
+
+            if opcao == '1':
+                print('\n< CADASTRO DE PRODUTO >')
+                nome = input('Nome: ')
+                valor = float(input('Valor: '))
+                categoria = input('Categoria: ')
+
+                if self.loja.adicionar_produto(nome, valor, categoria):
+                    print('Produto Registrado!')
+
+            elif opcao == '2':
+                pass
+            elif opcao == '3':
+                pass
+            else:
+                pass
+
     def menu(self) -> None:
         print('< MENU PRINCIPAL >')
-        
+
         print('1 ) Cadastrar Produto')
         print('2 ) Visualizar Produtos')
         print('3 ) Detalhar Produto')
