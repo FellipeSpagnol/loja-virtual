@@ -27,7 +27,7 @@ class Produto:
         return self._valor
     
     def valor_desconto(self) -> float:
-        return self._desconto
+        return self._desconto * self._valor
 
     def atualizar_desconto(self, desconto_novo: float) -> bool:
         if (0 <= desconto_novo <= 1):
