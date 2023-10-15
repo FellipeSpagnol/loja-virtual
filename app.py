@@ -26,10 +26,12 @@ class App:
 
             elif opcao == '2':
                 print('\n< PRODUTOS REGISTRADOS >')
-
-                for i in range(len(self.loja.produtos)):
-                    print(f'\n{i + 1}> {self.loja.produtos[i].nome}')
-                    print(f'> Valor: R${self.loja.produtos[i].valor():.2f}')
+                if self.loja.numero_de_produtos() > 0:
+                    for i in range(len(self.loja.produtos)):
+                        print(f'\n{i + 1}> {self.loja.produtos[i].nome}')
+                        print(f'> Valor: R${self.loja.produtos[i].valor():.2f}')
+                else:
+                    print('\nNão Há Produtos Registrados...')
 
             elif opcao == '3':
                 print('\n< DETALHES DE PRODUTO >')
@@ -112,16 +114,14 @@ class App:
             elif opcao == '9':
                 if self.loja.concluir_compra():
                     print('\nCompra Concluida!')
-                else:
-                    print('\nNão há nenhuma compra aberta no momento...')
-
+   
             elif opcao == '10':
                 if self.loja.compra_atual is not None:
                     print('\n< ADIÇÃO DE ITEM >')
                     nome = input('\nInforme código do produto: ')
 
                     produto = self.loja.buscar_produto(nome)
-                    if produto not in self.loja.produtos:
+                    if produto not in self.loja.compra_atual.itens:
                         if produto is not None:
                             quantidade = int(
                                 input('\nInforme o Número de Unidades: '))

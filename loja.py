@@ -74,9 +74,14 @@ class Loja:
             for item in self.compra_atual.itens:
                 for produto in self.produtos:
                     if item.produto == produto:
-                        produto.registrar_venda(item.quantidade)
+                        if not produto.registrar_venda(item.quantidade):
+                            print(
+                                f'\nEstoque do Produto {produto.nome} Insuficiente...')
+                            return False
+            self.compra_atual = None
             return True
         else:
+            print('\nNão há nenhuma compra aberta no momento...')
             return False
 
     def numero_de_produtos(self) -> int:
