@@ -26,7 +26,7 @@ class Compra:
             return False
 
     def exibir_compra(self) -> None:
-        print('< LISTA DE ITENS >')
+        print('<\n LISTA DE ITENS >')
         for i in range(len(self.itens)):
             print(f'{i+1} > {self.itens[i].produto.nome} ')
             print(f'Valor Unitário: R${self.itens[i].produto.valor():.2f}')

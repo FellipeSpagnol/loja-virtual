@@ -37,7 +37,8 @@ class Loja:
 
     def iniciar_compra(self, usuario: Pessoa) -> bool:
         if self.compra_atual is None:
-            self.usuarios.append(usuario)
+            if usuario not in self.usuarios:
+                self.usuarios.append(usuario)
             self.compra_atual = Compra(usuario)
             return True
         else:
