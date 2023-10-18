@@ -49,3 +49,6 @@ class Produto:
         
     def __eq__(self, outro: "Produto") -> bool:
         return self.nome == outro.nome
+    
+    def __hash__(self):
+        return hash(self.nome)

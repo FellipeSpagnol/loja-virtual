@@ -198,17 +198,6 @@ class App:
                 else:
                     print('Não Há Usuários Cadastrados...')
 
-            elif opcao == '22':
-                self.loja.compras_por_usuario()
-
-            elif opcao == '23':
-                self.loja.salvar()
-                print(f'\nEncerrando...')
-                break
-            else:
-                print(f'\nOpção Inválida...')
-
-            '''
             elif opcao == '20':
                 numero_produtos = 5
                 lista_produtos = self.loja.produtos_mais_caros(numero_produtos)
@@ -217,14 +206,25 @@ class App:
                     print(f'\n< {numero_produtos} PRODUTOS MAIS CAROS >')
                     for i in range(len(lista_produtos)):
                         print(
-                            f'{i+1} - {lista_produtos[i].nome} (R${lista_produtos[i].valor:.2f})')
+                            f'{i+1} - {lista_produtos[i].nome} (R${lista_produtos[i].valor()})')
                 else:
                     print('Não há produtos cadastrados...\n')
 
             elif opcao == '21':
                 numero_produtos = 5
                 self.loja.produtos_mais_vendidos(numero_produtos)
-            '''
+
+            elif opcao == '22':
+                self.loja.compras_por_usuario()
+
+            elif opcao == '23':
+                self.loja.salvar()
+                print(f'\nEncerrando...')
+                break
+            
+            else:
+                print(f'\nOpção Inválida...')
+
 
     def menu(self) -> None:
         print('\n< MENU PRINCIPAL >')

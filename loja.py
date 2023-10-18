@@ -143,15 +143,19 @@ class Loja:
         else:
             print('\nNão há usuários cadastrados...')
 
-    '''
-    def produtos_mais_caros(self, numero_produtos: int) -> Optional[list[Produto]]:
+    def produtos_mais_caros(self, numero_produtos: int) -> Optional[list]:
         if self.numero_de_produtos() > 0:
             dict_produtos = {produto: produto.valor()
                              for produto in self.produtos}
+            
+            num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
+            
             dict_ordenado = dict(sorted(dict_produtos.items(
-            ), key=lambda item: item[1], reverse=True)[:numero_produtos])
+            ), key=lambda item: item[1], reverse=True)[:num_disponivel])
 
-            return [produto for produto in dict_ordenado]
+            list = [produto for produto in dict_ordenado]
+            
+            return list
         else:
             return None
     
@@ -168,10 +172,12 @@ class Loja:
 
                 dict_produtos[produto] = contador
 
+            num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
+            
             dict_ordenado = dict(sorted(dict_produtos.items(
-            ), key=lambda item: item[1], reverse=True)[:numero_produtos])
+            ), key=lambda item: item[1], reverse=True)[:num_disponivel])
 
-            print(f'\n< {numero_produtos} PRODUTOS MAIS VENDIDOS >')
+            print(f'\n< {num_disponivel} PRODUTOS MAIS VENDIDOS >')
             for produto in dict_ordenado:
                 print(f'> {produto.nome}')
                 print(f'Número de Vendas: {dict_ordenado[produto]}')
@@ -179,4 +185,4 @@ class Loja:
                     f'Valor Obtido: {dict_ordenado[produto] * produto.valor()}\n')
         else:
             print('Não há produtos cadastrados...\n')
-    '''
+
