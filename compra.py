@@ -42,7 +42,7 @@ class Compra:
         else:
             return False
 
-    def atualizar_quantidade(self, index: int, quantidade_nova: int) -> list[bool]:
+    def atualizar_quantidade(self, index: int, quantidade_nova: int) -> list:
         if index in range(1, (len(self.itens)+1)):
             if quantidade_nova > 0:
                 self.itens[index].quantidade = quantidade_nova
