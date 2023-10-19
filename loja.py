@@ -78,11 +78,9 @@ class Loja:
                         if not produto.registrar_venda(item.quantidade):
                             print(
                                 f'\nEstoque do Produto {produto.nome} Insuficiente...')
-                            return False
             self.compra_atual = None
             return True
         else:
-            print('\nNão há nenhuma compra aberta no momento...')
             return False
 
     def numero_de_produtos(self) -> int:
@@ -169,7 +167,6 @@ class Loja:
                     for item in compra.itens:
                         if produto == item.produto:
                             contador += item.quantidade
-
                 dict_produtos[produto] = contador
 
             num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
@@ -185,4 +182,3 @@ class Loja:
                     f'Valor Obtido: {dict_ordenado[produto] * produto.valor()}\n')
         else:
             print('Não há produtos cadastrados...\n')
-

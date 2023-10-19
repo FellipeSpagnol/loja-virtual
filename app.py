@@ -95,15 +95,18 @@ class App:
                 cpf = input('\nInforme o CPF do Usuário: ')
 
                 usuario = Pessoa(nome, email, cpf)
-                if usuario not in self.loja.usuarios:
-                    if self.loja.iniciar_compra(usuario):
-                        print('Compra Iniciada!')
-                    else:
-                        print('Já há uma compra aberta no momento...')
-                        print(
-                            'Por favor, conclua ou cancele a compra atual antes de tentar novamente')
+                for usuario_registrado in self.loja.usuarios:
+                    if usuario == usuario_registrado:
+                        usuario = usuario_registrado
+                        break
+                
+                if self.loja.iniciar_compra(usuario):
+                    print('\nCompra Iniciada!')
                 else:
-                    print('Já há um usuário com pelo menos um dos dados...')
+                    print('\nJá há uma compra aberta no momento...')
+                    print(
+                        'Por favor, conclua ou cancele a compra atual antes de tentar novamente')
+
 
             elif opcao == '8':
                 if self.loja.cancelar_compra():
@@ -114,6 +117,8 @@ class App:
             elif opcao == '9':
                 if self.loja.concluir_compra():
                     print('\nCompra Concluida!')
+                else:
+                    print('\nNão há nenhuma compra aberta no momento...')
    
             elif opcao == '10':
                 if self.loja.compra_atual is not None:
@@ -121,16 +126,20 @@ class App:
                     nome = input('\nInforme código do produto: ')
 
                     produto = self.loja.buscar_produto(nome)
-                    if produto not in self.loja.compra_atual.itens:
-                        if produto is not None:
-                            quantidade = int(
-                                input('\nInforme o Número de Unidades: '))
-                            if self.loja.compra_atual.adicionar_item(produto, quantidade):
-                                print('Item Adicionado!')
+                    if produto is not None:
+                        if produto not in self.loja.compra_atual.itens:
+                            quantidade = int(input('\nInforme o Número de Unidades: '))
+                            if quantidade <= produto.estoque():
+                                if self.loja.compra_atual.adicionar_item(produto, quantidade):
+                                    print('\nItem Adicionado!')
+                                else:
+                                    print('\nQuantidade Inválida...')
                             else:
-                                print('Quantidade Inválida...')
+                                print("\nQuantidade Indisponível em Estoque...")
+                        else:
+                            print('\nEsse Produto Já Está no Carrinho...')    
                     else:
-                        print('Esse Produto Já Está no Carrinho...')
+                        print("\nProduto Não Encontrado...")            
                 else:
                     print('\nNão há nenhuma compra aberta no momento...')
 
