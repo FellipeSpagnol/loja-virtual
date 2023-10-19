@@ -78,6 +78,7 @@ class Loja:
                         if not produto.registrar_venda(item.quantidade):
                             print(
                                 f'\nEstoque do Produto {produto.nome} Insuficiente...')
+            self.compras.append(self.compra_atual)                
             self.compra_atual = None
             return True
         else:
