@@ -6,4 +6,4 @@ class Pessoa:
         self.cpf = cpf
 
     def __eq__(self, outro: "Pessoa") -> bool:
-        return (self.nome == outro.nome) or (self.email == outro.email) or (self.cpf == outro.cpf)
+        return (self.nome.title() == outro.nome.title()) or (self.email == outro.email) or (self.cpf == outro.cpf)

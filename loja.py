@@ -46,7 +46,7 @@ class Loja:
 
     def buscar_produto(self, nome_produto: str) -> Optional[Produto]:
         for produto in self.produtos:
-            if produto.nome == nome_produto:
+            if produto.nome.title() == nome_produto.title():
                 return produto
         return None
 
