@@ -124,8 +124,7 @@ class Loja:
 
                 if contador > contador_final:
                     usuario_final = usuario
-                    contador_final = contador
-
+                    contador_final = contador      
             return usuario_final
         else:
             return None
