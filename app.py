@@ -164,7 +164,7 @@ class App:
                 if self.loja.compra_atual is not None:
                     print('\n< ATUALIZAÇÃO DE ITEM >')
                     index = int(input('\nInforme o Índice do Item: '))
-                    quantidade = int(input('\nInforme o Índice do Item: '))
+                    quantidade = int(input('\nInforme a Nova Quantidade: '))
 
                     teste = self.loja.compra_atual.atualizar_quantidade(
                         index, quantidade)
@@ -215,7 +215,7 @@ class App:
                     print(f'\n< {numero_produtos} PRODUTOS MAIS CAROS >')
                     for i in range(len(lista_produtos)):
                         print(
-                            f'{i+1} - {lista_produtos[i].nome} (R${lista_produtos[i].valor()})')
+                            f'{i+1} - {lista_produtos[i].nome} (R${lista_produtos[i].valor():.2f})')
                 else:
                     print('Não há produtos cadastrados...\n')
 
@@ -231,6 +231,34 @@ class App:
                 print(f'\nEncerrando...')
                 break
             
+            elif opcao == '69':
+                self.loja.adicionar_produto('a', 1, 'p')
+                self.loja.buscar_produto('a').registrar_aquisicao(10)
+                
+                self.loja.adicionar_produto('b', 2, 'p')
+                self.loja.buscar_produto('b').registrar_aquisicao(10)
+                
+                self.loja.adicionar_produto('c', 3, 'p')
+                self.loja.buscar_produto('c').registrar_aquisicao(10)  
+
+                self.loja.adicionar_produto('d', 4, 'p')
+                self.loja.buscar_produto('d').registrar_aquisicao(10)
+
+                self.loja.adicionar_produto('e', 5, 'p')
+                self.loja.buscar_produto('e').registrar_aquisicao(10)
+
+                self.loja.adicionar_produto('f', 6, 'p')
+                self.loja.buscar_produto('f').registrar_aquisicao(10)
+                
+                self.loja.iniciar_compra(Pessoa('Fellipe', 'fellipe@', '123456789-0'))
+                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('a'), 5)
+                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('b'), 4)
+                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('c'), 3)
+                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('d'), 2)
+                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('e'), 1)
+                
+                self.loja.concluir_compra()
+                
             else:
                 print(f'\nOpção Inválida...')
 

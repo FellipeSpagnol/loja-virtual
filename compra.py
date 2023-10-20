@@ -45,7 +45,7 @@ class Compra:
     def atualizar_quantidade(self, index: int, quantidade_nova: int) -> list:
         if index in range(1, (len(self.itens)+1)):
             if quantidade_nova > 0:
-                self.itens[index].quantidade = quantidade_nova
+                self.itens[index-1].quantidade = quantidade_nova
                 return [True, True]
             else:
                 return [True, False]

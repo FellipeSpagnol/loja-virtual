@@ -78,6 +78,9 @@ class Loja:
                         if not produto.registrar_venda(item.quantidade):
                             print(
                                 f'\nEstoque do Produto {produto.nome} Insuficiente...')
+                        else:
+                            item.valor_final = produto.valor() * item.quantidade
+            
             self.compras.append(self.compra_atual)                
             self.compra_atual = None
             return True
@@ -97,7 +100,8 @@ class Loja:
         sum = 0
 
         for compra in self.compras:
-            sum += compra.custo()
+            for item in compra.itens:
+                sum += item.valor_final
 
         return sum
 
@@ -133,12 +137,13 @@ class Loja:
                 valor_total = 0
 
                 for compra in self.compras:
-                    if compra.usuario == usuario:
-                        valor_total += compra.custo()
+                    for item in compra.itens:
+                        if compra.usuario == usuario:
+                            valor_total += item.valor_final
 
                 print(f'\n> {usuario.nome}')
                 print(f'CPF: {usuario.cpf}')
-                print(f'Valor Total Gasto: R${valor_total}')
+                print(f'Valor Total Gasto: R${valor_total:.2f}')
         else:
             print('\nNão há usuários cadastrados...')
 
@@ -160,15 +165,18 @@ class Loja:
     
     def produtos_mais_vendidos(self, numero_produtos: int) -> None:
         if self.numero_de_produtos() > 0:
-            dict_produtos: dict[Produto, int] = {}
+            dict_produtos: dict[Produto, list] = {}
 
             for produto in self.produtos:
                 contador = 0
+                valor_final = 0
                 for compra in self.compras:
                     for item in compra.itens:
                         if produto == item.produto:
                             contador += item.quantidade
-                dict_produtos[produto] = contador
+                            valor_final += item.valor_final
+                print(valor_final)
+                dict_produtos[produto] = [contador, valor_final]
 
             num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
             
@@ -178,8 +186,8 @@ class Loja:
             print(f'\n< {num_disponivel} PRODUTOS MAIS VENDIDOS >')
             for produto in dict_ordenado:
                 print(f'> {produto.nome}')
-                print(f'Número de Vendas: {dict_ordenado[produto]}')
+                print(f'Número de Vendas: {dict_ordenado[produto][0]}')
                 print(
-                    f'Valor Obtido: {dict_ordenado[produto] * produto.valor()}\n')
+                    f'Valor Obtido: R${dict_ordenado[produto][1]:.2f}\n')
         else:
             print('Não há produtos cadastrados...\n')
