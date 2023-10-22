@@ -14,7 +14,7 @@ class Produto:
         if quantidade > 0:
             self._estoque += quantidade
             return True
-        else: 
+        else:
             return False
 
     def registrar_venda(self, quantidade: int) -> bool:
@@ -26,10 +26,10 @@ class Produto:
 
     def estoque(self) -> int:
         return self._estoque
-    
+
     def valor_bruto(self) -> float:
         return self._valor
-    
+
     def valor_desconto(self) -> float:
         return self._desconto * self._valor
 
@@ -46,9 +46,9 @@ class Produto:
             return True
         else:
             return False
-        
+
     def __eq__(self, outro: "Produto") -> bool:
         return self.nome.title() == outro.nome.title()
-    
+
     def __hash__(self):
         return hash(self.nome)

@@ -18,13 +18,13 @@ class App:
             if opcao == '1':
                 print('\n< CADASTRO DE PRODUTO >')
                 nome = input('Nome: ')
-                
+
                 try:
                     valor = float(input('Valor: '))
                 except ValueError:
                     print('\nO valor deve ser um número...')
                     continue
-                
+
                 categoria = input('Categoria: ')
 
                 if self.loja.adicionar_produto(nome, valor, categoria):
@@ -35,7 +35,8 @@ class App:
                 if self.loja.numero_de_produtos() > 0:
                     for i in range(len(self.loja.produtos)):
                         print(f'\n{i + 1}> {self.loja.produtos[i].nome}')
-                        print(f'> Valor: R${self.loja.produtos[i].valor():.2f}')
+                        print(
+                            f'> Valor: R${self.loja.produtos[i].valor():.2f}')
                 else:
                     print('\nNão Há Produtos Registrados...')
 
@@ -60,11 +61,12 @@ class App:
                 produto = self.loja.buscar_produto(nome)
                 if produto is not None:
                     try:
-                        desconto = float(input('\nInforme o Novo Desconto Percentual: '))
+                        desconto = float(
+                            input('\nInforme o Novo Desconto Percentual: '))
                     except ValueError:
                         print('\nO Desconto deve ser um número...')
                         continue
-                    
+
                     if produto.atualizar_desconto(desconto):
                         print('\nDesconto Atualizado!')
                     else:
@@ -79,11 +81,12 @@ class App:
                 produto = self.loja.buscar_produto(nome)
                 if produto is not None:
                     try:
-                        quantidade = int(input('\nInforme o Número de Unidades: '))
+                        quantidade = int(
+                            input('\nInforme o Número de Unidades: '))
                     except ValueError:
                         print('\nA quantidade deve ser um número...')
                         continue
-                    
+
                     if produto.registrar_aquisicao(quantidade):
                         print('Aquisição Registrada!')
                     else:
@@ -114,14 +117,13 @@ class App:
                     if usuario == usuario_registrado:
                         usuario = usuario_registrado
                         break
-                
+
                 if self.loja.iniciar_compra(usuario):
                     print('\nCompra Iniciada!')
                 else:
                     print('\nJá há uma compra aberta no momento...')
                     print(
                         'Por favor, conclua ou cancele a compra atual antes de tentar novamente')
-
 
             elif opcao == '8':
                 if self.loja.cancelar_compra():
@@ -134,7 +136,7 @@ class App:
                     print('\nCompra Concluida!')
                 else:
                     print('\nNão há nenhuma compra aberta no momento...')
-   
+
             elif opcao == '10':
                 if self.loja.compra_atual is not None:
                     print('\n< ADIÇÃO DE ITEM >')
@@ -143,13 +145,14 @@ class App:
                     produto = self.loja.buscar_produto(nome)
                     if produto is not None:
                         if produto not in self.loja.compra_atual.itens:
-                            
+
                             try:
-                                quantidade = int(input('\nInforme o Número de Unidades: '))
+                                quantidade = int(
+                                    input('\nInforme o Número de Unidades: '))
                             except ValueError:
                                 print('\nA quantidade deve ser um número...')
                                 continue
-                            
+
                             if quantidade <= produto.estoque():
                                 if self.loja.compra_atual.adicionar_item(produto, quantidade):
                                     print('\nItem Adicionado!')
@@ -158,9 +161,9 @@ class App:
                             else:
                                 print("\nQuantidade Indisponível em Estoque...")
                         else:
-                            print('\nEsse Produto Já Está no Carrinho...')    
+                            print('\nEsse Produto Já Está no Carrinho...')
                     else:
-                        print("\nProduto Não Encontrado...")            
+                        print("\nProduto Não Encontrado...")
                 else:
                     print('\nNão há nenhuma compra aberta no momento...')
 
@@ -173,13 +176,13 @@ class App:
             elif opcao == '12':
                 if self.loja.compra_atual is not None:
                     print('\n< REMOÇÃO DE ITEM >')
-                    
+
                     try:
                         index = int(input('\nInforme o Índice do Item: '))
                     except ValueError:
                         print('\nO índice deve ser um número...')
                         continue
-                    
+
                     if self.loja.compra_atual.remover_produto(index):
                         print('Item Removido!')
                     else:
@@ -190,10 +193,11 @@ class App:
             elif opcao == '13':
                 if self.loja.compra_atual is not None:
                     print('\n< ATUALIZAÇÃO DE ITEM >')
-                    
+
                     try:
                         index = int(input('\nInforme o Índice do Item: '))
-                        quantidade = int(input('\nInforme a Nova Quantidade: '))
+                        quantidade = int(
+                            input('\nInforme a Nova Quantidade: '))
                     except ValueError:
                         print('\nO valor deve ser um número...')
                         continue
@@ -241,8 +245,9 @@ class App:
 
             elif opcao == '20':
                 numero_produtos = 5
-                numero_produtos = numero_produtos if (len(self.loja.produtos) >= numero_produtos) else len(self.loja.produtos)
-                
+                numero_produtos = numero_produtos if (
+                    len(self.loja.produtos) >= numero_produtos) else len(self.loja.produtos)
+
                 lista_produtos = self.loja.produtos_mais_caros(numero_produtos)
 
                 if lista_produtos is not None:
@@ -264,38 +269,9 @@ class App:
                 self.loja.salvar()
                 print(f'\nEncerrando...')
                 break
-            
-            elif opcao == '69':
-                self.loja.adicionar_produto('a', 1, 'p')
-                self.loja.buscar_produto('a').registrar_aquisicao(10)
-                
-                self.loja.adicionar_produto('b', 2, 'p')
-                self.loja.buscar_produto('b').registrar_aquisicao(10)
-                
-                self.loja.adicionar_produto('c', 3, 'p')
-                self.loja.buscar_produto('c').registrar_aquisicao(10)  
 
-                self.loja.adicionar_produto('d', 4, 'p')
-                self.loja.buscar_produto('d').registrar_aquisicao(10)
-
-                self.loja.adicionar_produto('e', 5, 'p')
-                self.loja.buscar_produto('e').registrar_aquisicao(10)
-
-                self.loja.adicionar_produto('f', 6, 'p')
-                self.loja.buscar_produto('f').registrar_aquisicao(10)
-                
-                self.loja.iniciar_compra(Pessoa('Fellipe', 'fellipe@', '123456789-0'))
-                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('a'), 5)
-                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('b'), 4)
-                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('c'), 3)
-                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('d'), 2)
-                self.loja.compra_atual.adicionar_item(self.loja.buscar_produto('e'), 1)
-                
-                self.loja.concluir_compra()
-                
             else:
                 print(f'\nOpção Inválida...')
-
 
     def menu(self) -> None:
         print('\n< MENU PRINCIPAL >')

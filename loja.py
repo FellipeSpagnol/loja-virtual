@@ -80,8 +80,8 @@ class Loja:
                                 f'\nEstoque do Produto {produto.nome} Insuficiente...')
                         else:
                             item.valor_final = produto.valor() * item.quantidade
-            
-            self.compras.append(self.compra_atual)                
+
+            self.compras.append(self.compra_atual)
             self.compra_atual = None
             return True
         else:
@@ -124,7 +124,7 @@ class Loja:
 
                 if contador > contador_final:
                     usuario_final = usuario
-                    contador_final = contador      
+                    contador_final = contador
             return usuario_final
         else:
             return None
@@ -150,18 +150,19 @@ class Loja:
         if self.numero_de_produtos() > 0:
             dict_produtos = {produto: produto.valor()
                              for produto in self.produtos}
-            
-            num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
-            
+
+            num_disponivel = numero_produtos if (
+                self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
+
             dict_ordenado = dict(sorted(dict_produtos.items(
             ), key=lambda item: item[1], reverse=True)[:num_disponivel])
 
             list = [produto for produto in dict_ordenado]
-            
+
             return list
         else:
             return None
-    
+
     def produtos_mais_vendidos(self, numero_produtos: int) -> None:
         if self.numero_de_produtos() > 0:
             dict_produtos: dict[Produto, list] = {}
@@ -177,8 +178,9 @@ class Loja:
                 print(valor_final)
                 dict_produtos[produto] = [contador, valor_final]
 
-            num_disponivel = numero_produtos if (self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
-            
+            num_disponivel = numero_produtos if (
+                self.numero_de_produtos() >= numero_produtos) else self.numero_de_produtos()
+
             dict_ordenado = dict(sorted(dict_produtos.items(
             ), key=lambda item: item[1], reverse=True)[:num_disponivel])
 

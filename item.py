@@ -6,7 +6,7 @@ class Item:
         self.produto = produto
         self.nome = produto.nome
         self.quantidade = quantidade
-        self.valor_final = 0
+        self.valor_final = 0.0
 
     def custo(self) -> float:
         return self.produto.valor() * self.quantidade
